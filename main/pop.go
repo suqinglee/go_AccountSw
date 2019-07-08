@@ -40,8 +40,29 @@ func main() {
 			fmt.Scanln(&note)
 			//将这个收入情况，拼接到detail变量
 			detail += fmt.Sprintf("\n收    入\t%v\t\t%v\t\t%v",balance,money,note)
-		case "3":fmt.Println("登记支出..")
-		case "4":break loop
+		case "3":
+			fmt.Print("本次支出金额:")
+			fmt.Scanln(&money)
+			if money > balance {
+				fmt.Println("余额不足...")
+				break
+			}
+			balance -= money
+			fmt.Print("本次支出说明:")
+			fmt.Scanln(&note)
+			detail += fmt.Sprintf("\n支    出\t%v\t\t%v\t\t%v",balance,money,note)
+		case "4":
+			fmt.Print("你确定要退出么？y/n:")
+			for {
+				fmt.Scanln(&key)
+				if key == "y" || key == "n" {
+					break
+				}
+				fmt.Print("你的输入有误，请重新输入 y/n:")
+			}
+			if  key == "y" {
+				break loop
+			}
 		default:fmt.Println("请输入正确的选项..")
 		}
 	}
